@@ -1,0 +1,79 @@
+.productos-container{
+    flex: 1;
+    margin: 15px 10rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content:space-between;
+}
+
+.producto-card {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+    /* blanco brillante */
+    background-color: #f1f1f1;
+    border: 1px solid black;
+    width: 350px;
+    margin-top: 15px;
+    border: 1px solid rgba(77, 74, 74, 0.185);
+    border-radius: 10px;
+    &:hover {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+}
+
+.producto-card > h1 {
+    text-align: center;
+    color: black;
+    padding: 5px;
+    font-size: 15px;
+}
+
+.producto-card > p {
+    text-align: justify;
+    color: black;
+    padding: 5px;
+    font-size: 12px;
+}
+
+.producto-image{
+    width: 300px;
+    height: 300px;
+}
+
+.card-options {
+    margin-top: auto;
+}
+
+.card-options > button {
+    margin: 0px 10px 10px 10px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background-color: #2b2b2b;
+    color: white;
+    &:hover {
+        background-color: #3b3b3b;
+    }
+}
+
+.card-options > span {
+    font-weight: 500;
+}
+
+.btn {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0px 10px 5px 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #2b2b2b;
+    color: white;
+    &:hover {
+        background-color: #3b3b3b;
+    }
+}
