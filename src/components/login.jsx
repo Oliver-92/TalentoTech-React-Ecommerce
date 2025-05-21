@@ -1,6 +1,4 @@
-
-
-export default function Login({ setLogeadoUser, setLogeadoAdmin, user, admin }) {
+export default function Login({ setLogueadoUser, setLogueadoAdmin, user, admin }) {
     
 
     const btnStyles = {
@@ -14,13 +12,10 @@ export default function Login({ setLogeadoUser, setLogeadoAdmin, user, admin }) 
         fontSize: "1.1rem"
     }
 
-
-
-
     return (
         <div style={{ flex: 1 }}>
-            <button style={{...btnStyles, backgroundColor: user ? "green" : "black"}} onClick={setLogeadoUser}>{user ? "Cerrar sesion" : "Iniciar sesion"}</button>
-            <button style={{...btnStyles, backgroundColor: admin ? "green" : "black"}} onClick={setLogeadoAdmin}>{admin ? "Cerrar sesion Admin" : "Iniciar sesion Admin"}</button>
+            <button style={{...btnStyles, backgroundColor: user ? "green" : "black"}} onClick={setLogueadoUser}>{user ? "Cerrar sesion" : "Iniciar sesion"}</button>
+            <button style={{...btnStyles, backgroundColor: admin ? "green" : "black"}} onClick={setLogueadoAdmin}>{admin ? "Cerrar sesion Admin" : "Iniciar sesion Admin"}</button>
         </div>
     )
 }

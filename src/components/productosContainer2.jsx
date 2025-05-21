@@ -2,13 +2,13 @@ import '../styles/productosContainer.css'
 import Card2 from './card2'
 import { useState, useEffect } from 'react'
 
-function ProductosContainer2({funcionCarrito}) {
+function ProductosContainer2({}) {
     const [productos, setProductos] = useState([])
     const [cargando, setCargando] = useState(true)
     const [error, setError] = useState(null)
     
     useEffect(() => {
-        fetch('https://api.escuelajs.co/api/v1/products')
+        fetch('https://fakestoreapi.com/products')
             .then(res => res.json())
             .then(datos => {
                 console.log(datos);
@@ -22,10 +22,6 @@ function ProductosContainer2({funcionCarrito}) {
             });
     }, [])
 
-    function functionEnProductos(producto) {
-        funcionCarrito(producto)
-    }
-
     if (cargando) {
         return <h1 style={{flex: 1}}>Cargando...</h1>
     } else if (error) {
@@ -37,7 +33,6 @@ function ProductosContainer2({funcionCarrito}) {
                         <Card2
                             producto={producto}
                             key={producto.id}
-                            funcionCarrito={functionEnProductos}
                         />
                     ))}
                </div>

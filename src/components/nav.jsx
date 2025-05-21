@@ -1,8 +1,13 @@
 import '../styles/nav.css'
 import { Link } from 'react-router-dom';
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { CarritoContext } from '../contexts/CarritoContext';
+import { useContext } from 'react';
 
-function Nav({productosCarrito}) {
+function Nav() {
+
+    const { productosCarrito } = useContext(CarritoContext);
+
     return (
         <nav className='navbar'>
             <ul>
