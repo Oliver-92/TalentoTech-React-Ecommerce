@@ -9,6 +9,7 @@ import Contact from './components/contact'
 import About from './components/about'
 import Footer from './components/footer'
 import Login from './components/login'
+import Login2 from './components/login2'
 import Admin from './components/admin'
 import ProductoDetalle from './components/productoDetalle'
 import { Navigate } from 'react-router-dom'
@@ -34,9 +35,10 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path='/login' element={<Login user={usuarioLogueado} admin={adminLogueado} setLogueadoAdmin={manejarAdmin} setLogueadoUser={manejarUser} />} />
+          {/* <Route path='/login' element={<Login user={usuarioLogueado} admin={adminLogueado} setLogueadoAdmin={manejarAdmin} setLogueadoUser={manejarUser} />} /> */}
+          <Route path="/login" element={<Login2 />} />
           <Route path="/productos" element={<ProductosContainer2/>} />
-          <Route path="/carrito" element={<Carrito usuarioLogueado={usuarioLogueado} />} />
+          <Route path="/carrito" element={<Carrito/>} />
           <Route path="/contacto" element={<Contact />} />
           <Route path="/about" element={<About />} />
           <Route path="/productos/:id" element={<ProductoDetalle/>} />
