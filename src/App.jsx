@@ -13,21 +13,11 @@ import Login2 from './components/login2'
 import Admin from './components/admin'
 import ProductoDetalle from './components/productoDetalle'
 import { Navigate } from 'react-router-dom'
+import Admin2 from './components/admin2'
+import Login3 from './components/login3'
 
 
 function App() {
-
-  const [usuarioLogueado, setUsuarioLogueado] = useState(false)
-  const [adminLogueado, setAdminLogueado] = useState(false)
-
-
-  function manejarAdmin() {
-    setAdminLogueado(!adminLogueado)
-  }
-
-  function manejarUser() {
-    setUsuarioLogueado(!usuarioLogueado)
-  }
     
   return (
     <Router>
@@ -42,7 +32,8 @@ function App() {
           <Route path="/contacto" element={<Contact />} />
           <Route path="/about" element={<About />} />
           <Route path="/productos/:id" element={<ProductoDetalle/>} />
-          <Route path='/admin' element={adminLogueado ? <Admin /> : <Navigate to={"/login"} replace />} />
+          {/* <Route path='/admin' element={adminLogueado ? <Admin /> : <Navigate to={"/login"} replace />} /> */}
+          <Route path='/admin' element={<Admin2/>} />
         </Routes>
         <Footer />
       </>

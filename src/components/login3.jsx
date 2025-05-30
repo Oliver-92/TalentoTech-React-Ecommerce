@@ -1,12 +1,16 @@
+// con firebase
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../contexts/AuthContext';
+import { crearUsuario } from '../auth/firebase';
 
-function Login2() {
+function Login3() {
     const [usuario, setUsuario] = useState('');
     const [password, setPassword] = useState('');
     const { login, user, logout } = useAuthContext();
     const navigate = useNavigate();
+
     const handleSubmit = (e) => {
         e.preventDefault(); // Simulación de autenticación 
 
@@ -17,6 +21,12 @@ function Login2() {
             alert('Credenciales incorrectas');
         }
     };
+
+    function registrarUsuario(e) {
+        e.preventDefault();
+        crearUsuario(usuario, password);
+        login(usuario);
+    }
 
     const handleSubmit2 = (e) => {
         e.preventDefault();
@@ -33,7 +43,8 @@ function Login2() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <div>
+            <form onSubmit={handleSubmit}>
             <h2>Iniciar sesión</h2>
             <div>
                 <label>Usuario:</label>
@@ -45,7 +56,21 @@ function Login2() {
             </div>
             <button type="submit">Iniciar sesión</button>
         </form>
+
+        <form onSubmit={registrarUsuario}>
+            <h2>Registrarse</h2>
+            <div>
+                <label>Mail:</label>
+                <input type="text" value={usuario} onChange={(e) => setUsuario(e.target.value)} />
+            </div>
+            <div>
+                <label>Contraseña:</label>
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            </div>
+            <button type="submit">Registrarse</button>
+        </form>
+        </div>
     );
 }
 
-export default Login2;
+export default Login3;
