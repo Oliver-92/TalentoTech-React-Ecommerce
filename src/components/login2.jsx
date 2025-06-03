@@ -7,6 +7,7 @@ function Login2() {
     const [password, setPassword] = useState('');
     const { login, user, logout } = useAuthContext();
     const navigate = useNavigate();
+    
     const handleSubmit = (e) => {
         e.preventDefault(); // Simulación de autenticación 
 
