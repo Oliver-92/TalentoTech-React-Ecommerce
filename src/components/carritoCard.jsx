@@ -1,7 +1,7 @@
 import '../styles/productosContainer.css'
 
 function CarritoCard({ producto, funcionDisparadora }) {
-    const { title, image, price, cantidad } = producto;
+    const { name, image, price, cantidad } = producto;
 
     function borrarProducto() {
         funcionDisparadora(producto.id)
@@ -9,8 +9,8 @@ function CarritoCard({ producto, funcionDisparadora }) {
     
     return (
         <div className="carrito-card">
-            <img className="carrito-image" src={image} alt={title} />
-            <h1>{title}</h1>
+            <img className="carrito-image" src={image} alt={name} />
+            <h1>{name}</h1>
             <p>Precio unitario: ${price}</p>
             <p>Cantidad: {cantidad}</p>
             <p>Subtotal: ${(price * cantidad).toFixed(2)}</p>

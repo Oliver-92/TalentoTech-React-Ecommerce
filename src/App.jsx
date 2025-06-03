@@ -15,6 +15,7 @@ import ProductoDetalle from './components/productoDetalle'
 import { Navigate } from 'react-router-dom'
 import Admin2 from './components/admin2'
 import Login3 from './components/login3'
+import FormularioProducto from './components/formularioProducto'
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/productos/:id" element={<ProductoDetalle/>} />
           {/* <Route path='/admin' element={adminLogueado ? <Admin /> : <Navigate to={"/login"} replace />} /> */}
           <Route path='/admin' element={<Admin2/>} />
+          <Route path="/admin/agregarProductos" element={<FormularioProducto />} />
         </Routes>
         <Footer />
       </>

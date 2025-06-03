@@ -1,0 +1,6 @@
+.swal2-popup.minimal-alert {
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  font-family: 'Helvetica Neue', sans-serif;
+  padding: 1.5rem 2rem;
+}

@@ -1,4 +1,4 @@
-import { dispararSweetBasico } from '../assets/sweetAlerts';
+import { dispararSweetBasico, sweetAddCart } from '../assets/sweetAlerts';
 import '../styles/productosContainer.css'
 import { useState, useContext } from 'react'
 import { Link } from "react-router-dom";
@@ -6,12 +6,12 @@ import { CarritoContext } from "../contexts/CarritoContext"
 
 function Card2({ producto }) {
     const { agregarAlCarrito } = useContext(CarritoContext);
-    const { title, image, price } = producto;
+    const { name, image, price } = producto;
     const [cantidad, setCantidad] = useState(1);
 
     function funcionCarrito() {
     if (cantidad < 1) return;
-    dispararSweetBasico("Producto Agregado", "El producto fue agregado al carrito con éxito", "success", "Cerrar");
+    sweetAddCart();
     agregarAlCarrito({ ...producto, cantidad });
   }
 
@@ -25,8 +25,8 @@ function Card2({ producto }) {
     
     return (
         <div className="producto-card">
-            <h1>{title}</h1>
-            <img className="producto-image" src={image} alt={title} />
+            <h1>{name}</h1>
+            <img className="producto-image" src={image} alt={name} />
             <p>Precio: ${price}</p>
             <div className="card-options">
                 <button onClick={restarContador}>-</button>

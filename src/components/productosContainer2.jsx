@@ -8,7 +8,7 @@ function ProductosContainer2({}) {
     const [error, setError] = useState(null)
     
     useEffect(() => {
-        fetch('https://fakestoreapi.com/products')
+        fetch('https://6827a00a6b7628c52910f842.mockapi.io/data')
             .then(res => res.json())
             .then(datos => {
                 console.log(datos);

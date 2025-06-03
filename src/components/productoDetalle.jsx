@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { dispararSweetBasico } from '../assets/sweetAlerts';
+import { dispararSweetBasico, sweetAddCart } from '../assets/sweetAlerts';
 import '../styles/productoDetalle.css'
 import { CarritoContext } from "../contexts/CarritoContext";
 
@@ -13,10 +13,10 @@ function ProductoDetalle({ }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
+    fetch('https://6827a00a6b7628c52910f842.mockapi.io/data')
       .then(res => res.json())
       .then((datos) => {
-        const productoEncontrado = datos.find((item) => item.id === Number(id));
+        const productoEncontrado = datos.find((item) => item.id === id);
         if (productoEncontrado) {
           setProducto(productoEncontrado);
         } else {
@@ -33,7 +33,7 @@ function ProductoDetalle({ }) {
 
   function funcionCarrito() {
     if (cantidad < 1) return;
-    dispararSweetBasico("Producto Agregado", "El producto fue agregado al carrito con éxito", "success", "Cerrar");
+    sweetAddCart();
     agregarAlCarrito({ ...producto, cantidad });
   }
 
@@ -56,10 +56,10 @@ function ProductoDetalle({ }) {
   return (
     <div className="detalle-container">
       <div className="detalle-imagen-container">
-        <img className="detalle-imagen" src={producto.image} alt={producto.title} />
+        <img className="detalle-imagen" src={producto.image} alt={producto.name} />
       </div>
       <div className="detalle-info">
-        <h2>{producto.title}</h2>
+        <h2>{producto.name}</h2>
         <p>{producto.description}</p>
         <p className="detalle-precio">Precio: {producto.price}$</p>
         <div className="detalle-contador">
