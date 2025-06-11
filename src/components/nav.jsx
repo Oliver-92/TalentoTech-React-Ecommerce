@@ -9,7 +9,7 @@ function Nav() {
 
     const { productosCarrito } = useContext(CarritoContext);
 
-    const { user } = useAuthContext();
+    const { admin } = useAuthContext();
 
     return (
         <nav className='navbar'>
@@ -20,7 +20,7 @@ function Nav() {
                 <li><Link to="/about">Sobre nosotros</Link></li>
                 <li><Link to="/admin" >Admin</Link></li> 
                 <li><Link to="/login" >Login</Link></li> 
-                {user ? <li><Link to="/admin/agregarProductos">Agregar productos</Link></li> : <></>}
+                {admin ? <li><Link to="/admin/agregarProductos">Agregar productos</Link></li> : <></>}
                 <li><Link to="/carrito"><AiOutlineShoppingCart /> <span>{productosCarrito.length > 0 ? '(' + productosCarrito.length + ')' : ''}</span></Link></li>
             </ul>
         </nav>

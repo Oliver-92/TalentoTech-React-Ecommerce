@@ -16,6 +16,7 @@ import { Navigate } from 'react-router-dom'
 import Admin2 from './components/admin2'
 import Login3 from './components/login3'
 import FormularioProducto from './components/formularioProducto'
+import FormularioEdicion from './components/FormularioEdicion'
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           {/* <Route path='/admin' element={adminLogueado ? <Admin /> : <Navigate to={"/login"} replace />} /> */}
           <Route path='/admin' element={<Admin2/>} />
           <Route path="/admin/agregarProductos" element={<FormularioProducto />} />
+          <Route path="/admin/editarProducto/:id" element={<FormularioEdicion/>}/>
         </Routes>
         <Footer />
       </>

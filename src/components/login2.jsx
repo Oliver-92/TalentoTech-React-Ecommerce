@@ -5,7 +5,7 @@ import { useAuthContext } from '../contexts/AuthContext';
 function Login2() {
     const [usuario, setUsuario] = useState('');
     const [password, setPassword] = useState('');
-    const { login, user, logout } = useAuthContext();
+    const { login, user, logout, admin } = useAuthContext();
     const navigate = useNavigate();
     
     const handleSubmit = (e) => {
@@ -14,6 +14,9 @@ function Login2() {
         if (usuario === 'admin' && password === '1234') {
             login(usuario);
             navigate('/');
+        } else if (usuario === 'admin1' && password === '1234') {
+            login(usuario);
+            navigate('/admin');
         } else {
             alert('Credenciales incorrectas');
         }
@@ -25,7 +28,7 @@ function Login2() {
     }
 
 
-    if (user == "admin") {
+    if (user == "admin" || user == "admin1") {
         return (
             <form onSubmit={handleSubmit2}>
                 <button type="submit">Cerrar sesión</button>
