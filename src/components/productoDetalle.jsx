@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { dispararSweetBasico, sweetAddCart } from '../assets/sweetAlerts';
 import '../styles/productoDetalle.css'
 import { CarritoContext } from "../contexts/CarritoContext";
@@ -7,9 +7,10 @@ import { useAuthContext } from "../contexts/AuthContext";
 import { useProductosContext } from "../contexts/ProductosContext";
 
 function ProductoDetalle({ }) {
+  const navegar = useNavigate();
   const { agregarAlCarrito } = useContext(CarritoContext);
   const { admin } = useAuthContext();
-  const { productoEncontrado, obtenerProducto } = useProductosContext();
+  const { productoEncontrado, obtenerProducto, eliminarProducto } = useProductosContext();
   const { id } = useParams();
   // const [producto, setProducto] = useState(null);
   const [cantidad, setCantidad] = useState(1);
@@ -34,6 +35,14 @@ function ProductoDetalle({ }) {
     if (cantidad < 1) return;
     sweetAddCart();
     agregarAlCarrito({ ...productoEncontrado, cantidad });
+  }
+
+  function dispararEliminar(){
+    eliminarProducto(id).then(() => {
+      navegar("/productos")
+    }).catch((error) => {
+      dispararSweetBasico("Hubo un problema al agregar el producto", error, "error", "Cerrar")
+    })
   }
 
   function sumarContador() {
@@ -68,6 +77,7 @@ function ProductoDetalle({ }) {
         </div>
         <button className="btn-cart" onClick={funcionCarrito}>Agregar al carrito</button>
         {admin ? <Link to={"/admin/editarProducto/" + id}> <button>Editar producto</button></Link> : <button onClick={funcionCarrito}>Agregar al carrito</button> }
+        {admin ? <button onClick={dispararEliminar} >Eliminar Producto</button> : <></>}
       </div>
     </div>
   );

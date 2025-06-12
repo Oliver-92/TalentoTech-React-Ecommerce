@@ -19,6 +19,7 @@ export function AuthProvider({ children }) {
     const logout = () => {
         localStorage.removeItem('authToken');
         setUser(null);
+        setAdmin(false);
     };
     return (
         <AuthContext.Provider value={{ user, login, logout, admin }}>

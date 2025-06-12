@@ -1,12 +1,14 @@
 import { createContext, useState, useContext } from 'react';
+
 // Crear el contexto de de los productos
 const ProductosContext = createContext();
+
 export function ProductosProvider({ children }) {
     const [productos, setProductos] = useState([])
     const [productoEncontrado, setProductoEncontrado] = useState([])
 
     function obtenerProductos() {
-        return(
+        return (
             new Promise((res, rej) => {
                 fetch('https://6827a00a6b7628c52910f842.mockapi.io/data')
                     .then((respuesta) =>
@@ -24,65 +26,119 @@ export function ProductosProvider({ children }) {
                         //setCargando(false);
                         rej(error)
                     })
-                ;
+                    ;
             })
         )
     }
 
     const agregarProducto = (producto) => {
-        return(
+        return (
             new Promise(async (res, rej) => {
                 try {
                     const respuesta = await fetch('https://6827a00a6b7628c52910f842.mockapi.io/data', {
                         method: 'POST',
                         headers: {
-                        'Content-Type': 'application/json',
+                            'Content-Type': 'application/json',
                         },
                         body: JSON.stringify(producto),
                     });
 
                     if (!respuesta.ok) {
-                            throw new Error('Error al agregar el producto.');
+                        throw new Error('Error al agregar el producto.');
                     }
                     const data = await respuesta.json();
-                            console.log('Producto agregado:', data);
-                            res(data)
-                            //alert('Producto agregado correctamente');
-                    } catch (error) {
-                        console.error(error.message);
-                        //alert('Hubo un problema al agregar el producto.');
-                        rej(error.message)
-                    }
+                    console.log('Producto agregado:', data);
+                    res(data)
+                    //alert('Producto agregado correctamente');
+                } catch (error) {
+                    console.error(error.message);
+                    //alert('Hubo un problema al agregar el producto.');
+                    rej(error.message)
+                }
             })
         )
     };
 
-    function obtenerProducto(id){
-        return(
+    function obtenerProducto(id) {
+        return (
             new Promise((res, rej) => {
-               fetch("https://6827a00a6b7628c52910f842.mockapi.io/data")
-                .then((res) => res.json())
-                .then((datos) => {
-                    const productoEncontrado = datos.find((item) => item.id === id);
-                    if (productoEncontrado) {
-                    setProductoEncontrado(productoEncontrado);
-                    res(datos)
-                    } else {
-                        rej("Producto no encontrado")
-                    }
-                })
-                .catch((err) => {
-                    console.log("Error:", err);
-                    rej("Hubo un error al obtener el producto.");
-                }); 
+                fetch("https://6827a00a6b7628c52910f842.mockapi.io/data")
+                    .then((res) => res.json())
+                    .then((datos) => {
+                        const productoEncontrado = datos.find((item) => item.id === id);
+                        if (productoEncontrado) {
+                            setProductoEncontrado(productoEncontrado);
+                            res(datos)
+                        } else {
+                            rej("Producto no encontrado")
+                        }
+                    })
+                    .catch((err) => {
+                        console.log("Error:", err);
+                        rej("Hubo un error al obtener el producto.");
+                    });
             })
         )
     }
 
+    function editarProducto(producto) {
+        return (
+            new Promise(async (res, rej) => {
+                try {
+                    const respuesta = await fetch(`https://6827a00a6b7628c52910f842.mockapi.io/data/${producto.id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(producto),
+                    });
+                    if (!respuesta.ok) {
+                        throw new Error('Error al actualizar el producto.');
+                    }
+                    const data = await respuesta.json();
+                    res(data)
+                } catch (error) {
+                    console.error(error.message);
+                    rej(error)
+                }
+            })
+        )
+    }
+
+    const eliminarProducto = (id) => {
+        const confirmar = window.confirm('¿Estás seguro de eliminar?');
+        if (confirmar) {
+            return (
+                new Promise(async (res, rej) => {
+                    try {
+                        const respuesta = await fetch(`https://6827a00a6b7628c52910f842.mockapi.io/data/${id}`, {
+                            method: 'DELETE',
+                        });
+                        if (!respuesta.ok) throw new Error('Error al eliminar');
+                        alert('Producto eliminado correctamente.');
+                        res()
+                    } catch (error) {
+                        console.error(error.message);
+                        alert('Hubo un problema al eliminar el producto.');
+                        rej(error)
+                    }
+                })
+            )
+        }
+    }
+
     return (
-        <ProductosContext.Provider value={{ obtenerProductos, productos, agregarProducto, obtenerProducto, productoEncontrado }}>
-        {children}
-        </ProductosContext.Provider> 
+        <ProductosContext.Provider value={{
+            obtenerProductos,
+            productos,
+            agregarProducto,
+            obtenerProducto,
+            productoEncontrado,
+            editarProducto,
+            eliminarProducto
+        }}>
+            {children}
+        </ProductosContext.Provider>
     );
 }
 export const useProductosContext = () => useContext(ProductosContext);
